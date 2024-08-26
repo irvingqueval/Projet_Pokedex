@@ -1,7 +1,13 @@
 <div class="pokemon-list">
-  <div *ngFor="let pokemon of pokemons" class="pokemon-card">
+  @for (pokemon of pokemons; track pokemon.id) {
+  <div class="pokemon-card">
     <h3>#{{ pokemon.id }} - {{ pokemon.name | titlecase }}</h3>
     <img [src]="pokemon.sprite" alt="{{ pokemon.name }}">
-    <p>Types: {{ pokemon.types.join(', ') }}</p>
+    <div class="pokemon-types">
+      @for (type of pokemon.types; track type) {
+      <span [attr.type]="type">{{ type | titlecase }}</span>
+      }
+    </div>
   </div>
+  }
 </div>
