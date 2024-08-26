@@ -1,29 +1,59 @@
+.pokedex-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.pokedex-header {
+  background-color: #ffcb05;
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.pokedex-header h1 {
+  color: #2a75bb;
+  margin: 0;
+  font-size: 24px;
+}
+
 .pokemon-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
 }
 
 .pokemon-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  margin: 8px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: 150px;
+  padding: 16px;
 }
 
 .pokemon-card img {
   width: 100px;
   height: 100px;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.pokemon-card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
 }
 
 /* Conteneur des types de Pokémon */
 .pokemon-types {
   display: flex;
   gap: 8px;
-  justify-content: center; /* Centre les types */
+  justify-content: center;
   margin-top: 10px;
 }
+
 /* Style des badges des types de Pokémon */
 .pokemon-types span {
   background-color: #eee;
@@ -38,70 +68,87 @@
   background-color: #78C850;
   color: white;
 }
+
 .pokemon-types span[type="Poison"] {
   background-color: #A040A0;
   color: white;
 }
+
 .pokemon-types span[type="Fire"] {
   background-color: #F08030;
   color: white;
 }
+
 .pokemon-types span[type="Flying"] {
   background-color: #A890F0;
   color: white;
 }
+
 .pokemon-types span[type="Water"] {
   background-color: #6890F0;
   color: white;
 }
+
 .pokemon-types span[type="Bug"] {
   background-color: #A8B820;
   color: white;
 }
+
 .pokemon-types span[type="Normal"] {
   background-color: #A8A878;
   color: white;
 }
+
 .pokemon-types span[type="Electric"] {
   background-color: #F8D030;
   color: white;
 }
+
 .pokemon-types span[type="Ground"] {
   background-color: #E0C068;
   color: white;
 }
+
 .pokemon-types span[type="Fairy"] {
   background-color: #EE99AC;
   color: white;
 }
+
 .pokemon-types span[type="Fighting"] {
   background-color: #C03028;
   color: white;
 }
+
 .pokemon-types span[type="Psychic"] {
   background-color: #F85888;
   color: white;
 }
+
 .pokemon-types span[type="Rock"] {
   background-color: #B8A038;
   color: white;
 }
+
 .pokemon-types span[type="Ghost"] {
   background-color: #705898;
   color: white;
 }
+
 .pokemon-types span[type="Ice"] {
   background-color: #98D8D8;
   color: white;
 }
+
 .pokemon-types span[type="Dragon"] {
   background-color: #7038F8;
   color: white;
 }
+
 .pokemon-types span[type="Dark"] {
   background-color: #705848;
   color: white;
 }
+
 .pokemon-types span[type="Steel"] {
   background-color: #B8B8D0;
   color: white;
