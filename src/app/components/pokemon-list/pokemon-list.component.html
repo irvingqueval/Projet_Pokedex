@@ -1,13 +1,18 @@
-<div class="pokemon-list">
-  @for (pokemon of pokemons; track pokemon.id) {
-  <div class="pokemon-card">
-    <h3>#{{ pokemon.id }} - {{ pokemon.name | titlecase }}</h3>
-    <img [src]="pokemon.sprite" alt="{{ pokemon.name }}">
-    <div class="pokemon-types">
-      @for (type of pokemon.types; track type) {
-      <span [attr.type]="type">{{ type | titlecase }}</span>
+<div class="pokedex-container">
+  <header class="pokedex-header">
+      <h1>Pokédex</h1>
+  </header>
+  <div class="pokemon-list">
+      @for (pokemon of pokemons; track pokemon.id) {
+      <div class="pokemon-card">
+          <img [src]="pokemon.sprite" alt="{{ pokemon.name }}">
+          <h3>#{{ pokemon.id }} - {{ pokemon.name | titlecase }}</h3>
+          <div class="pokemon-types">
+              @for (type of pokemon.types; track type) {
+              <span [attr.type]="type">{{ type | titlecase }}</span>
+              }
+          </div>
+      </div>
       }
-    </div>
   </div>
-  }
 </div>
