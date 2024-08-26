@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+/* Reset des marges et des paddings par défaut */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Optionnel : Une typographie de base pour l'ensemble du projet */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa; /* Couleur de fond légère */
+  color: #333; /* Couleur de texte par défaut */
+  line-height: 1.6; /* Espacement entre les lignes */
+}
+
+/* Ajout d'une marge par défaut pour les éléments principaux */
+h1, h2, h3, h4, h5, h6, p {
+  margin-bottom: 1rem;
+}
