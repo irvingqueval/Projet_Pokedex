@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'titlecase',
-  standalone: true  // Indique que ce pipe est autonome
+  standalone: true
 })
 export class TitleCasePipe implements PipeTransform {
 

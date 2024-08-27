@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { PokemonService } from '../../services/pokemon.service';
 import { Pokemon } from '../../models/pokemon.model';
 import { TitleCasePipe } from '../../pipes/title-case.pipe'; // Assure-toi que ce chemin est correct
@@ -8,7 +7,6 @@ import { TitleCasePipe } from '../../pipes/title-case.pipe'; // Assure-toi que c
   selector: 'app-pokemon-list',
   standalone: true,  // Déclare le composant comme autonome
   imports: [
-    CommonModule,     // Pour les directives Angular communes (ngIf, ngFor, etc.)
     TitleCasePipe     // Pour le pipe titlecase
   ],
   templateUrl: './pokemon-list.component.html',
