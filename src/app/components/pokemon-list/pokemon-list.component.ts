@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, HostListener } from '@angular/core';
 import { PokemonService } from '../../services/pokemon.service';
 import { Pokemon } from '../../models/pokemon.model';
 import { TitleCasePipe } from '../../pipes/title-case.pipe';
@@ -15,7 +15,7 @@ export class PokemonListComponent implements OnInit, OnChanges {
   pokemons: Pokemon[] = [];
   filteredPokemons: Pokemon[] = [];
   offset = 0;
-  limit = 151; // Charger tous les Pokémon de la première génération
+  limit = 20; // Charger par lots de 20 Pokémon
   loading = false;
 
   @Input() filter: string = '';
@@ -23,7 +23,7 @@ export class PokemonListComponent implements OnInit, OnChanges {
   constructor(private pokemonService: PokemonService) { }
 
   ngOnInit(): void {
-    this.loadPokemons();
+    this.loadMorePokemons();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -32,12 +32,15 @@ export class PokemonListComponent implements OnInit, OnChanges {
     }
   }
 
-  loadPokemons(): void {
+  loadMorePokemons(): void {
+    if (this.loading) return; // Empêche les requêtes multiples en même temps
     this.loading = true;
+
     this.pokemonService.getPokemonList(this.offset, this.limit).subscribe((data: Pokemon[]) => {
-      this.pokemons = data;
-      this.applyFilter();
-      this.loading = false;
+      this.pokemons = [...this.pokemons, ...data]; // Ajouter les nouveaux Pokémon à la liste
+      this.applyFilter(); // Appliquer le filtre après chaque chargement de données
+      this.offset += this.limit; // Incrémenter l'offset pour la prochaine requête
+      this.loading = false; // Terminer le chargement
     });
   }
 
@@ -48,6 +51,15 @@ export class PokemonListComponent implements OnInit, OnChanges {
       );
     } else {
       this.filteredPokemons = [...this.pokemons];
+    }
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(): void {
+    const pos = (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight;
+    const max = document.documentElement.scrollHeight || document.body.scrollHeight;
+    if (pos >= max && !this.loading) {
+      this.loadMorePokemons(); // Charger plus de Pokémon lorsqu'on atteint le bas de la page
     }
   }
 }
