@@ -18,4 +18,10 @@ import { HeaderComponent } from './components/header/header.component';
 })
 export class AppComponent {
   title = 'Projet_Pokedex';
+  searchTerm: string = ''; // Stocke le terme de recherche
+
+  // Méthode pour mettre à jour le terme de recherche
+  onSearch(term: string) {
+    this.searchTerm = term.toLowerCase(); // Convertit le terme en minuscules pour une recherche insensible à la casse
+  }
 }

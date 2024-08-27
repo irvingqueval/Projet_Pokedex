@@ -1,5 +1,5 @@
 <div class="pokemon-list">
-  @for (pokemon of pokemons; track pokemon.id) {
+  @for (pokemon of filteredPokemons; track pokemon.id) {
   <div class="pokemon-card">
     <img [src]="pokemon.sprite" alt="{{ pokemon.name }}">
     <p>#{{ pokemon.id }}</p>

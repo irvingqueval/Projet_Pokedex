@@ -17,3 +17,16 @@
 .pokedex-logo {
   height: 75px;
 }
+
+.search-input {
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  margin-left: 20px;
+  width: 200px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #ffcb05; /* Une couleur en lien avec le thème */
+}
