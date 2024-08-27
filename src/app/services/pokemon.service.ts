@@ -9,21 +9,25 @@ import { Pokemon } from '../models/pokemon.model';
 })
 export class PokemonService {
 
-  private baseUrl = 'https://pokeapi.co/api/v2/pokemon';
+  private baseUrl = 'https://pokeapi.co/api/v2/pokemon'; // URL de base pour l'API Pokémon
 
   constructor(private http: HttpClient) { }
 
-  getPokemonList(): Observable<Pokemon[]> {
-    return this.http.get<any>(`${this.baseUrl}?limit=151`).pipe(
-      map(response => response.results), // Récupère seulement les résultats (URLs)
+  getPokemonList(offset: number, limit: number): Observable<Pokemon[]> {
+    const maxLimit = 151;
+    if (offset + limit > maxLimit) {
+      limit = maxLimit - offset; // Ajuste la limite pour ne pas dépasser 151
+    }
+
+    return this.http.get<any>(`${this.baseUrl}?offset=${offset}&limit=${limit}`).pipe(
+      map(response => response.results),
       switchMap((pokemons: any[]) => {
-        // Transforme chaque URL en une requête Observable de détails Pokémon
         const requests = pokemons.map(pokemon => this.getPokemonDetails(pokemon.url));
-        // Utilise forkJoin pour exécuter toutes les requêtes en parallèle et attendre que toutes soient terminées
         return forkJoin(requests);
       })
     );
   }
+
 
   private getPokemonDetails(url: string): Observable<Pokemon> {
     return this.http.get<any>(url).pipe(
