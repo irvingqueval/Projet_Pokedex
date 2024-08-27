@@ -7,15 +7,13 @@
   margin-bottom: 20px;
   max-width: 600px;
   margin: 0 auto;
-  padding: 20px;
-}
-
-.pokedex-header h1 {
-  color: #2a75bb;
-  margin: 0;
-  font-size: 24px;
+  position: fixed; /* Le header devient fixe */
+  top: 0; /* Fixé en haut de la page */
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Assure que le header est au-dessus des autres éléments */
 }
 
 .pokedex-logo {
-  height: 100px;
+  height: 75px;
 }
