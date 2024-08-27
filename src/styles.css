@@ -8,10 +8,10 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f8f9fa;
   color: #333;
-  line-height: 1.6; /* Espacement entre les lignes */
+  line-height: 1.5; /* Espacement entre les lignes */
   padding-top: 130px;
 }
 
 h1, h2, h3, h4, h5, h6, p {
-  margin-bottom: 1rem;
+  margin-bottom: 0,75rem;
 }

@@ -1,4 +1,4 @@
 <main>
-  <app-header></app-header>
-  <app-pokemon-list></app-pokemon-list>
+  <app-header (search)="onSearch($event)"></app-header>
+  <app-pokemon-list [filter]="searchTerm"></app-pokemon-list>
 </main>
