@@ -17,6 +17,7 @@ export class PokemonListComponent implements OnInit, OnChanges {
   offset = 0;
   limit = 20; // Charger par lots de 20 Pokémon
   loading = false;
+  maxPokemons = 151; // Nombre maximum de Pokémon à charger
 
   @Input() filter: string = '';
 
@@ -33,20 +34,24 @@ export class PokemonListComponent implements OnInit, OnChanges {
   }
 
   loadMorePokemons(): void {
-    if (this.loading) return; // Empêche les requêtes multiples en même temps
+    if (this.loading || this.offset >= this.maxPokemons) return; // Empêche le chargement s'il n'y a plus de Pokémon à charger
     this.loading = true;
 
     // Introduire un délai de 500ms avant de charger les données
     setTimeout(() => {
       this.pokemonService.getPokemonList(this.offset, this.limit).subscribe((data: Pokemon[]) => {
-        this.pokemons = [...this.pokemons, ...data]; // Ajouter les nouveaux Pokémon à la liste
-        this.applyFilter(); // Appliquer le filtre après chaque chargement de données
-        this.offset += this.limit; // Incrémenter l'offset pour la prochaine requête
-        this.loading = false; // Terminer le chargement
+        this.pokemons = [...this.pokemons, ...data];
+        this.applyFilter();
+        this.offset += this.limit;
+        this.loading = false;
+
+        // S'assurer que l'offset ne dépasse pas le nombre maximum de Pokémon
+        if (this.offset >= this.maxPokemons) {
+          this.offset = this.maxPokemons;
+        }
       });
     }, 500);
   }
-
 
   applyFilter(): void {
     if (this.filter) {
@@ -62,7 +67,7 @@ export class PokemonListComponent implements OnInit, OnChanges {
   onScroll(): void {
     const pos = (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight;
     const max = document.documentElement.scrollHeight || document.body.scrollHeight;
-    if (pos >= max && !this.loading) {
+    if (pos >= max && !this.loading && this.offset < this.maxPokemons) {
       this.loadMorePokemons(); // Charger plus de Pokémon lorsqu'on atteint le bas de la page
     }
   }
