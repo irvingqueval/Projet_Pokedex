@@ -36,13 +36,17 @@ export class PokemonListComponent implements OnInit, OnChanges {
     if (this.loading) return; // Empêche les requêtes multiples en même temps
     this.loading = true;
 
-    this.pokemonService.getPokemonList(this.offset, this.limit).subscribe((data: Pokemon[]) => {
-      this.pokemons = [...this.pokemons, ...data]; // Ajouter les nouveaux Pokémon à la liste
-      this.applyFilter(); // Appliquer le filtre après chaque chargement de données
-      this.offset += this.limit; // Incrémenter l'offset pour la prochaine requête
-      this.loading = false; // Terminer le chargement
-    });
+    // Introduire un délai de 500ms avant de charger les données
+    setTimeout(() => {
+      this.pokemonService.getPokemonList(this.offset, this.limit).subscribe((data: Pokemon[]) => {
+        this.pokemons = [...this.pokemons, ...data]; // Ajouter les nouveaux Pokémon à la liste
+        this.applyFilter(); // Appliquer le filtre après chaque chargement de données
+        this.offset += this.limit; // Incrémenter l'offset pour la prochaine requête
+        this.loading = false; // Terminer le chargement
+      });
+    }, 500);
   }
+
 
   applyFilter(): void {
     if (this.filter) {
