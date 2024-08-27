@@ -2,7 +2,8 @@
   @for (pokemon of pokemons; track pokemon.id) {
   <div class="pokemon-card">
     <img [src]="pokemon.sprite" alt="{{ pokemon.name }}">
-    <h3>#{{ pokemon.id }} - {{ pokemon.name | titlecase }}</h3>
+    <p>#{{ pokemon.id }}</p>
+    <h3>{{ pokemon.name | titlecase }}</h3>
     <div class="pokemon-types">
       @for (type of pokemon.types; track type) {
       <span [attr.type]="type">{{ type | titlecase }}</span>
