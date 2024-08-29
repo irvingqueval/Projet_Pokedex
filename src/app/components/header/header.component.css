@@ -1,17 +1,25 @@
 .pokedex-header {
   background-color: #ffcb05;
-  text-align: center;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   max-width: 600px;
   margin: 0 auto;
-  position: fixed; /* Le header devient fixe */
-  top: 0; /* Fixé en haut de la page */
+  position: fixed;
+  top: 0;
   left: 0;
   right: 0;
-  z-index: 1000; /* Assure que le header est au-dessus des autres éléments */
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
 }
 
 .pokedex-logo {
@@ -22,11 +30,80 @@
   padding: 10px;
   border: 2px solid #ccc;
   border-radius: 8px;
-  margin-left: 20px;
   width: 200px;
+  margin-left: auto;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #ffcb05; /* Une couleur en lien avec le thème */
+  border-color: #ffcb05;
+}
+
+.type-filter {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.pokemon-filter {
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  border: 2px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+  background-image: linear-gradient(45deg, #ffdd57, #ffcb05);
+}
+
+.pokemon-filter:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border-color: #ffcb05;
+}
+
+.pokemon-filter::after {
+  content: '\25BC'; /* Flèche vers le bas */
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666;
+}
+
+.pokemon-filter select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  padding: 10px 40px 10px 15px;
+  border-radius: 8px;
+  width: 100%;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.pokemon-filter select:hover {
+  background-color: #f3f3f3;
+}
+
+.pokemon-filter select:focus {
+  border-color: #ffcb05;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(255, 203, 5, 0.5);
+}
+
+.pokemon-filter select:disabled {
+  background-color: #f8f9fa;
+  color: #999;
+  cursor: not-allowed;
 }
