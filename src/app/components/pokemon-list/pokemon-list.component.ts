@@ -28,8 +28,11 @@ export class PokemonListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['filter']) {
+    if (changes['filter'] && this.filter.length >= 2) {
+      this.filteredPokemons = []; // Réinitialiser les résultats filtrés
       this.applyFilter();
+    } else if (!this.filter || this.filter.length < 2) {
+      this.filteredPokemons = [...this.pokemons]; // Afficher tous les Pokémon si le filtre a moins de 2 caractères
     }
   }
 
@@ -37,11 +40,9 @@ export class PokemonListComponent implements OnInit, OnChanges {
     if (this.loading || this.offset >= this.maxPokemons) return; // Empêche le chargement s'il n'y a plus de Pokémon à charger
     this.loading = true;
 
-    // Introduire un délai de 500ms avant de charger les données
     setTimeout(() => {
       this.pokemonService.getPokemonList(this.offset, this.limit).subscribe((data: Pokemon[]) => {
         this.pokemons = [...this.pokemons, ...data];
-        this.applyFilter();
         this.offset += this.limit;
         this.loading = false;
 
@@ -49,17 +50,24 @@ export class PokemonListComponent implements OnInit, OnChanges {
         if (this.offset >= this.maxPokemons) {
           this.offset = this.maxPokemons;
         }
+
+        // Réappliquer le filtre après le chargement
+        this.applyFilter();
       });
     }, 500);
   }
 
   applyFilter(): void {
-    if (this.filter) {
-      this.filteredPokemons = this.pokemons.filter(pokemon =>
-        pokemon.name.toLowerCase().includes(this.filter)
-      );
-    } else {
-      this.filteredPokemons = [...this.pokemons];
+    const searchQuery = this.filter.toLowerCase();
+
+    // Filtrer les Pokémon déjà chargés
+    this.filteredPokemons = this.pokemons.filter(pokemon =>
+      pokemon.name.toLowerCase().includes(searchQuery)
+    );
+
+    // Charger plus de Pokémon si le filtre n'a pas trouvé assez de résultats et si tous les Pokémon ne sont pas encore chargés
+    if (this.filteredPokemons.length < this.limit && this.offset < this.maxPokemons) {
+      this.loadMorePokemons(); // Charger plus de Pokémon et réappliquer le filtre
     }
   }
 
