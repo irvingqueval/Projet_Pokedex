@@ -1,13 +1,13 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, HostListener } from '@angular/core';
-import { PokemonService } from '../../services/pokemon.service';
-import { Pokemon } from '../../models/pokemon.model';
-import { TitleCasePipe } from '../../pipes/title-case.pipe';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, HostListener } from '@angular/core';  // Import des fonctionnalités de base d'Angular
+import { PokemonService } from '../../services/pokemon.service';  // Service pour récupérer les données des Pokémon
+import { Pokemon } from '../../models/pokemon.model';  // Modèle pour représenter un Pokémon
+import { TitleCasePipe } from '../../pipes/title-case.pipe';  // Pipe pour transformer du texte en Title Case (optionnel)
+import { CommonModule } from '@angular/common';  // Module pour les fonctionnalités communes d'Angular
 
 @Component({
   selector: 'app-pokemon-list',
   standalone: true,
-  imports: [CommonModule, TitleCasePipe],
+  imports: [CommonModule, TitleCasePipe],  // Import des modules et pipes utilisés par le composant
   templateUrl: './pokemon-list.component.html',
   styleUrls: ['./pokemon-list.component.css']
 })
@@ -20,6 +20,7 @@ export class PokemonListComponent implements OnInit, OnChanges {
   maxPokemons = 151; // Nombre maximum de Pokémon à charger
 
   @Input() filter: string = '';
+  @Input() selectedType: string = ''; // Type de Pokémon sélectionné
 
   constructor(private pokemonService: PokemonService) { }
 
@@ -28,11 +29,13 @@ export class PokemonListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['filter'] && this.filter.length >= 2) {
-      this.filteredPokemons = []; // Réinitialiser les résultats filtrés
-      this.applyFilter();
-    } else if (!this.filter || this.filter.length < 2) {
-      this.filteredPokemons = [...this.pokemons]; // Afficher tous les Pokémon si le filtre a moins de 2 caractères
+    if (changes['filter'] || changes['selectedType']) {
+      if (this.filter.length >= 2 || this.selectedType) {
+        this.filteredPokemons = []; // Réinitialiser les résultats filtrés
+        this.applyFilter();
+      } else if (!this.filter || this.filter.length < 2) {
+        this.filteredPokemons = [...this.pokemons]; // Afficher tous les Pokémon si le filtre a moins de 2 caractères
+      }
     }
   }
 
@@ -60,9 +63,10 @@ export class PokemonListComponent implements OnInit, OnChanges {
   applyFilter(): void {
     const searchQuery = this.filter.toLowerCase();
 
-    // Filtrer les Pokémon déjà chargés
+    // Filtrer les Pokémon déjà chargés par nom et par type
     this.filteredPokemons = this.pokemons.filter(pokemon =>
-      pokemon.name.toLowerCase().includes(searchQuery)
+      pokemon.name.toLowerCase().includes(searchQuery) &&
+      (this.selectedType === '' || pokemon.types.includes(this.selectedType))
     );
 
     // Charger plus de Pokémon si le filtre n'a pas trouvé assez de résultats et si tous les Pokémon ne sont pas encore chargés
