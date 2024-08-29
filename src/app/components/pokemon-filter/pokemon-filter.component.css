@@ -1,0 +1,60 @@
+.pokemon-filter {
+  display: flex; /* Aligner le label et la case de sélection en ligne */
+  align-items: center; /* Centre verticalement le label et le select */
+  width: 100%;
+  max-width: 280px; /* Réduire légèrement la largeur maximale */
+  padding: 8px; /* Réduire le padding */
+  margin: 0 auto;
+  border-radius: 10px; /* Réduire légèrement le rayon des coins */
+  background-color: #ffffff;
+  border: 2px solid #ccc;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Réduire l'ombre */
+  position: relative;
+  background-image: linear-gradient(45deg, #ffdd57, #ffcb05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pokemon-filter label {
+  margin-right: 8px; /* Réduire l'espace entre le label et le select */
+  font-size: 14px; /* Réduire la taille de la police */
+  font-weight: bold;
+  color: #333;
+}
+
+.pokemon-filter::after {
+  content: '\25BC'; /* Flèche vers le bas */
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666;
+}
+
+.pokemon-filter select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  font-size: 14px; /* Réduire la taille de la police */
+  padding: 8px 36px 8px 12px; /* Réduire le padding */
+  border-radius: 8px;
+  width: 100%;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1); /* Réduire l'ombre interne */
+}
+
+.pokemon-filter select:focus {
+  border-color: #ffcb05;
+  background-color: #ffffff;
+  box-shadow: 0 0 4px rgba(255, 203, 5, 0.4); /* Réduire l'ombre lors du focus */
+}
+
+.pokemon-filter select:disabled {
+  background-color: #f8f9fa;
+  color: #999;
+  cursor: not-allowed;
+}

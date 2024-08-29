@@ -1,5 +1,4 @@
 <main>
   <app-header (search)="onSearch($event)"></app-header>
-  <app-pokemon-filter (typeSelected)="onTypeSelected($event)"></app-pokemon-filter>
   <app-pokemon-list [filter]="searchTerm" [selectedType]="selectedType"></app-pokemon-list>
 </main>
