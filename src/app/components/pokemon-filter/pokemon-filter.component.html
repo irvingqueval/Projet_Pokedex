@@ -1,0 +1,9 @@
+<div class="pokemon-filter">
+  <label for="pokemon-type">Filter by Type:</label>
+  <select id="pokemon-type" (change)="onTypeChange($event)">
+    <option value="">All Types</option>
+    @for (type of types; track type) {
+      <option [value]="type">{{ type }}</option>
+    }
+  </select>
+</div>
