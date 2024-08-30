@@ -18,33 +18,37 @@ export class PokemonDetailsComponent implements OnInit {
 
   constructor(
     private pokemonService: PokemonService,
-    private route: ActivatedRoute  // Injecte ActivatedRoute pour accéder aux paramètres de l'URL
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    // Récupère l'ID du Pokémon depuis les paramètres de l'URL et charge les détails
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
-        this.fetchPokemonDetails(+id);  // Passe directement l'ID à la méthode
+        this.fetchPokemonDetails(+id);
       } else {
-        this.error = true;
-        this.loading = false;
+        this.handleError();
       }
     });
   }
 
   fetchPokemonDetails(id: number): void {
     this.loading = true;
-    this.pokemonService.getPokemonDetailsById(id).subscribe(
-      (data: PokemonDetails) => {
-        this.pokemon = data;
-        this.loading = false;
-      },
-      error => {
-        this.error = true;
-        this.loading = false;
-      }
-    );
+
+    // Ajouter un délai avant de charger les détails du Pokémon
+    setTimeout(() => {
+      this.pokemonService.getPokemonDetailsById(id).subscribe(
+        (data: PokemonDetails) => {
+          this.pokemon = data;
+          this.loading = false;
+        },
+        () => this.handleError()
+      );
+    }, 500); // Délai de 500ms avant de faire la requête
+  }
+
+  handleError(): void {
+    this.error = true;
+    this.loading = false;
   }
 }

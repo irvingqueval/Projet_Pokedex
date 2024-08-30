@@ -1,6 +1,8 @@
 <header class="pokedex-header">
   <div class="header-top">
-    <img [ngClass]="{'full-width-logo': !showSearchAndFilter}" class="pokedex-logo" src="/assets/pokedex-header.svg" alt="Pokédex">
+    <a [routerLink]="['/pokemons']">
+      <img [ngClass]="{'full-width-logo': !showSearchAndFilter}" class="pokedex-logo" src="/assets/pokedex-header.svg" alt="Pokédex">
+    </a>
 
     @if (showSearchAndFilter) {
       <input type="text" class="search-input" placeholder="Rechercher un Pokémon..." (input)="onSearch($event)">

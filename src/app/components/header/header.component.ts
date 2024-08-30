@@ -1,12 +1,13 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router'; // Import de RouterModule
 import { PokemonFilterComponent } from '../pokemon-filter/pokemon-filter.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, PokemonFilterComponent],
+  imports: [CommonModule, RouterModule, PokemonFilterComponent], // Ajout de RouterModule dans imports
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
