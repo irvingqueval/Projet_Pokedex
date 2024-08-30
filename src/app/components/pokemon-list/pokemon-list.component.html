@@ -1,15 +1,15 @@
 <div class="pokemon-list">
   @for (pokemon of filteredPokemons; track pokemon.id) {
-  <div class="pokemon-card">
-    <img [src]="pokemon.sprite" alt="{{ pokemon.name }}">
-    <p>#{{ pokemon.id }}</p>
-    <h3>{{ pokemon.name | titlecase }}</h3>
-    <div class="pokemon-types">
-      @for (type of pokemon.types; track type) {
-      <span [attr.type]="type">{{ type | titlecase }}</span>
-      }
-    </div>
-  </div>
+    <a [routerLink]="['/pokemon', pokemon.id]" class="pokemon-card">
+      <img [src]="pokemon.sprite" alt="{{ pokemon.name }}">
+      <p>#{{ pokemon.id }}</p>
+      <h3>{{ pokemon.name | titlecase }}</h3>
+      <div class="pokemon-types">
+        @for (type of pokemon.types; track type) {
+          <span [attr.type]="type">{{ type | titlecase }}</span>
+        }
+      </div>
+    </a>
   }
 
   @if (loading) {
@@ -19,5 +19,4 @@
       </div>
     </div>
   }
-
 </div>

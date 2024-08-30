@@ -3,11 +3,12 @@ import { PokemonService } from '../../services/pokemon.service';  // Service pou
 import { Pokemon } from '../../models/pokemon.model';  // Modèle pour représenter un Pokémon
 import { TitleCasePipe } from '../../pipes/title-case.pipe';  // Pipe pour transformer du texte en Title Case (optionnel)
 import { CommonModule } from '@angular/common';  // Module pour les fonctionnalités communes d'Angular
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-list',
   standalone: true,
-  imports: [CommonModule, TitleCasePipe],  // Import des modules et pipes utilisés par le composant
+  imports: [CommonModule, TitleCasePipe, RouterModule],  // Import des modules et pipes utilisés par le composant
   templateUrl: './pokemon-list.component.html',
   styleUrls: ['./pokemon-list.component.css']
 })
@@ -26,14 +27,20 @@ export class PokemonListComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.loadMorePokemons();
+    console.log("Component PokemonList initialized");
+    console.log(this.pokemons);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['filter'] || changes['selectedType']) {
-      if (this.filter.length >= 2 || this.selectedType) {
+      const filter = changes['filter'] ? changes['filter'].currentValue : '';
+      const selectedType = changes['selectedType'] ? changes['selectedType'].currentValue : '';
+
+      // Vérifie si 'filter' ou 'selectedType' sont bien définis avant d'y accéder
+      if (filter && filter.length >= 2 || selectedType) {
         this.filteredPokemons = []; // Réinitialiser les résultats filtrés
         this.applyFilter();
-      } else if (!this.filter || this.filter.length < 2) {
+      } else {
         this.filteredPokemons = [...this.pokemons]; // Afficher tous les Pokémon si le filtre a moins de 2 caractères
       }
     }
@@ -61,19 +68,21 @@ export class PokemonListComponent implements OnInit, OnChanges {
   }
 
   applyFilter(): void {
-    const searchQuery = this.filter.toLowerCase();
+    const searchQuery = this.filter ? this.filter.toLowerCase() : '';  // S'assurer que filter n'est pas undefined
+    const selectedType = this.selectedType ? this.selectedType.toLowerCase() : '';  // S'assurer que selectedType n'est pas undefined
 
     // Filtrer les Pokémon déjà chargés par nom et par type
     this.filteredPokemons = this.pokemons.filter(pokemon =>
-      pokemon.name.toLowerCase().includes(searchQuery) &&
-      (this.selectedType === '' || pokemon.types.includes(this.selectedType))
+        pokemon.name.toLowerCase().includes(searchQuery) &&
+        (selectedType === '' || pokemon.types.map(type => type.toLowerCase()).includes(selectedType))
     );
 
     // Charger plus de Pokémon si le filtre n'a pas trouvé assez de résultats et si tous les Pokémon ne sont pas encore chargés
     if (this.filteredPokemons.length < this.limit && this.offset < this.maxPokemons) {
-      this.loadMorePokemons(); // Charger plus de Pokémon et réappliquer le filtre
+        this.loadMorePokemons(); // Charger plus de Pokémon et réappliquer le filtre
     }
-  }
+}
+
 
   @HostListener('window:scroll', ['$event'])
   onScroll(): void {
