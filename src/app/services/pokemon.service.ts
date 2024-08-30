@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { Pokemon } from '../models/pokemon.model';
+import { Pokemon, PokemonDetails } from '../models/pokemon.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class PokemonService {
 
   constructor(private http: HttpClient) { }
 
+  // Récupère une liste de Pokémon avec pagination
   getPokemonList(offset: number, limit: number): Observable<Pokemon[]> {
     const maxLimit = 151;
     if (offset + limit > maxLimit) {
@@ -28,7 +29,7 @@ export class PokemonService {
     );
   }
 
-
+  // Récupère les détails d'un Pokémon par son URL
   private getPokemonDetails(url: string): Observable<Pokemon> {
     return this.http.get<any>(url).pipe(
       map(details => ({
@@ -36,6 +37,24 @@ export class PokemonService {
         name: details.name,
         sprite: details.sprites.front_default,
         types: details.types.map((typeInfo: any) => typeInfo.type.name)
+      }))
+    );
+  }
+
+  // Récupère les détails d'un Pokémon par son ID
+  getPokemonDetailsById(id: number): Observable<PokemonDetails> {
+    return this.http.get<any>(`${this.baseUrl}/${id}`).pipe(
+      map(details => ({
+        id: details.id,
+        name: details.name,
+        sprite: details.sprites.front_default,
+        types: details.types.map((typeInfo: any) => typeInfo.type.name),
+        height: details.height,
+        weight: details.weight,
+        stats: details.stats.map((statInfo: any) => ({
+          name: statInfo.stat.name,
+          value: statInfo.base_stat
+        }))
       }))
     );
   }

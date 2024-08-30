@@ -1,0 +1,164 @@
+.pokemon-details-container {
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 95%; /* S'ajuste bien sur des petits écrans */
+  text-align: center;
+}
+
+.pokemon-name {
+  font-size: 1.5em; /* Taille de police adaptée pour mobile */
+  margin-bottom: 10px;
+}
+
+.pokemon-image {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin: 15px 0;
+}
+
+.pokemon-info {
+  text-align: left;
+  margin-top: 10px;
+  font-size: 0.9em; /* Taille de texte réduite pour mobile */
+}
+
+.pokemon-types ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex; /* Aligne les types en ligne */
+  gap: 8px; /* Espace entre les types */
+  justify-content: center; /* Centre les types horizontalement */
+}
+
+.pokemon-types li {
+  display: inline-block; /* Chaque type s'affiche sur une seule ligne */
+}
+
+.pokemon-stats ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.pokemon-stats li {
+  background-color: #ffdd57;
+  border-radius: 8px;
+  padding: 5px;
+  margin: 3px 3px; /* Ajoute un espacement vertical entre les statistiques */
+  display: inline-block;
+  font-size: 0.85em; /* Taille de texte compacte pour mobile */
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.pokemon-types span {
+  background-color: #eee;
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 14px;
+  color: #333;
+  text-transform: capitalize;
+}
+
+.pokemon-types span[type="Grass"] {
+  background-color: #78C850;
+  color: white;
+}
+
+.pokemon-types span[type="Poison"] {
+  background-color: #A040A0;
+  color: white;
+}
+
+.pokemon-types span[type="Fire"] {
+  background-color: #F08030;
+  color: white;
+}
+
+.pokemon-types span[type="Flying"] {
+  background-color: #A890F0;
+  color: white;
+}
+
+.pokemon-types span[type="Water"] {
+  background-color: #6890F0;
+  color: white;
+}
+
+.pokemon-types span[type="Bug"] {
+  background-color: #A8B820;
+  color: white;
+}
+
+.pokemon-types span[type="Normal"] {
+  background-color: #A8A878;
+  color: white;
+}
+
+.pokemon-types span[type="Electric"] {
+  background-color: #F8D030;
+  color: white;
+}
+
+.pokemon-types span[type="Ground"] {
+  background-color: #E0C068;
+  color: white;
+}
+
+.pokemon-types span[type="Fairy"] {
+  background-color: #EE99AC;
+  color: white;
+}
+
+.pokemon-types span[type="Fighting"] {
+  background-color: #C03028;
+  color: white;
+}
+
+.pokemon-types span[type="Psychic"] {
+  background-color: #F85888;
+  color: white;
+}
+
+.pokemon-types span[type="Rock"] {
+  background-color: #B8A038;
+  color: white;
+}
+
+.pokemon-types span[type="Ghost"] {
+  background-color: #705898;
+  color: white;
+}
+
+.pokemon-types span[type="Ice"] {
+  background-color: #98D8D8;
+  color: white;
+}
+
+.pokemon-types span[type="Dragon"] {
+  background-color: #7038F8;
+  color: white;
+}
+
+.pokemon-types span[type="Dark"] {
+  background-color: #705848;
+  color: white;
+}
+
+.pokemon-types span[type="Steel"] {
+  background-color: #B8B8D0;
+  color: white;
+}
