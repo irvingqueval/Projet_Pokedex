@@ -1,11 +1,15 @@
 <header class="pokedex-header">
   <div class="header-top">
-    <img class="pokedex-logo" src="/assets/pokedex-header.svg" alt="Pokédex">
-    <input type="text" class="search-input" placeholder="Rechercher un Pokémon..." (input)="onSearch($event)">
+    <img [ngClass]="{'full-width-logo': !showSearchAndFilter}" class="pokedex-logo" src="/assets/pokedex-header.svg" alt="Pokédex">
+
+    @if (showSearchAndFilter) {
+      <input type="text" class="search-input" placeholder="Rechercher un Pokémon..." (input)="onSearch($event)">
+    }
   </div>
 
-  <!-- Filtre par types en dessous -->
-  <div class="type-filter">
-    <app-pokemon-filter (typeSelected)="onTypeSelected($event)"></app-pokemon-filter>
-  </div>
+  @if (showSearchAndFilter) {
+    <div class="type-filter">
+      <app-pokemon-filter (typeSelected)="onTypeSelected($event)"></app-pokemon-filter>
+    </div>
+  }
 </header>
