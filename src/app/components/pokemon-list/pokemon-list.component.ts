@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, HostListener } from '@angular/core';  // Import des fonctionnalités de base d'Angular
+import { Component, OnInit, OnChanges, SimpleChanges, HostListener } from '@angular/core';  // Import des fonctionnalités de base d'Angular
 import { PokemonService } from '../../services/pokemon.service';  // Service pour récupérer les données des Pokémon
 import { Pokemon } from '../../models/pokemon.model';  // Modèle pour représenter un Pokémon
 import { TitleCasePipe } from '../../pipes/title-case.pipe';  // Pipe pour transformer du texte en Title Case (optionnel)
 import { CommonModule } from '@angular/common';  // Module pour les fonctionnalités communes d'Angular
 import { RouterModule } from '@angular/router';
+import { FilterService } from '../../services/filter.service';  // Import du service de filtre
 
 @Component({
   selector: 'app-pokemon-list',
@@ -20,30 +21,31 @@ export class PokemonListComponent implements OnInit, OnChanges {
   loading = false;
   maxPokemons = 151; // Nombre maximum de Pokémon à charger
 
-  @Input() filter: string = '';
-  @Input() selectedType: string = ''; // Type de Pokémon sélectionné
+  filter: string = '';
+  selectedType: string = '';
 
-  constructor(private pokemonService: PokemonService) { }
+  constructor(private pokemonService: PokemonService, private filterService: FilterService) { }
 
   ngOnInit(): void {
     this.loadMorePokemons();
+
+    // Abonnement aux observables du service de filtre
+    this.filterService.searchTerm$.subscribe(term => {
+      this.filter = term;
+      this.applyFilter();
+    });
+
+    this.filterService.selectedType$.subscribe(type => {
+      this.selectedType = type;
+      this.applyFilter();
+    });
+
     console.log("Component PokemonList initialized");
     console.log(this.pokemons);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['filter'] || changes['selectedType']) {
-      const filter = changes['filter'] ? changes['filter'].currentValue : '';
-      const selectedType = changes['selectedType'] ? changes['selectedType'].currentValue : '';
-
-      // Vérifie si 'filter' ou 'selectedType' sont bien définis avant d'y accéder
-      if (filter && filter.length >= 2 || selectedType) {
-        this.filteredPokemons = []; // Réinitialiser les résultats filtrés
-        this.applyFilter();
-      } else {
-        this.filteredPokemons = [...this.pokemons]; // Afficher tous les Pokémon si le filtre a moins de 2 caractères
-      }
-    }
+    // Plus nécessaire car nous utilisons le service de filtre
   }
 
   loadMorePokemons(): void {
@@ -81,8 +83,7 @@ export class PokemonListComponent implements OnInit, OnChanges {
     if (this.filteredPokemons.length < this.limit && this.offset < this.maxPokemons) {
         this.loadMorePokemons(); // Charger plus de Pokémon et réappliquer le filtre
     }
-}
-
+  }
 
   @HostListener('window:scroll', ['$event'])
   onScroll(): void {

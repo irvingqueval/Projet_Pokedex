@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './pokemon-filter.component.html',
   styleUrls: ['./pokemon-filter.component.css']
 })
-export class PokemonFilterComponent implements OnInit {
+export class PokemonFilterComponent {
   types: string[] = [
     'Normal', 'Fire', 'Water', 'Electric', 'Grass', 'Ice', 'Fighting',
     'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock',
@@ -17,8 +17,6 @@ export class PokemonFilterComponent implements OnInit {
 
   selectedType: string = '';
   @Output() typeSelected = new EventEmitter<string>();
-
-  ngOnInit(): void {}
 
   onTypeChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;

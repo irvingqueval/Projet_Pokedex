@@ -4,6 +4,7 @@ import { PokemonListComponent } from './components/pokemon-list/pokemon-list.com
 import { TitleCasePipe } from './pipes/title-case.pipe';  // Import de TitleCasePipe, si tu l'utilises pour mettre en forme le texte
 import { HeaderComponent } from './components/header/header.component';  // Import du HeaderComponent
 import { PokemonFilterComponent } from './components/pokemon-filter/pokemon-filter.component'; // Import du composant PokemonFilterComponent
+import { FilterService } from './services/filter.service';
 
 @Component({
   selector: 'app-root',
@@ -23,11 +24,13 @@ export class AppComponent {
   searchTerm: string = '';
   selectedType: string = '';
 
+  constructor(private filterService: FilterService) {}
+
   onSearch(term: string) {
-    this.searchTerm = term.toLowerCase();
+    this.filterService.setSearchTerm(term.toLowerCase());
   }
 
   onTypeSelected(type: string) {
-    this.selectedType = type.toLowerCase();
+    this.filterService.setSelectedType(type.toLowerCase());
   }
 }
