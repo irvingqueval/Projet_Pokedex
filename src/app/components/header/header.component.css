@@ -13,7 +13,7 @@
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centre les éléments horizontalement */
+  align-items: center;
 }
 
 .header-top {
@@ -25,12 +25,12 @@
 
 .pokedex-logo {
   height: 75px;
-  transition: width 0.3s ease, height 0.3s ease; /* Transition douce pour le changement de taille */
+  transition: width 0.3s ease, height 0.3s ease;
 }
 
 .full-width-logo {
-  width: 100%; /* Le logo prend toute la largeur */
-  height: auto; /* Ajuste la hauteur automatiquement */
+  width: 100%;
+  height: auto;
   display: block;
   text-align: center;
 }
@@ -69,13 +69,8 @@
   background-image: linear-gradient(45deg, #ffdd57, #ffcb05);
 }
 
-.pokemon-filter:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  border-color: #ffcb05;
-}
-
 .pokemon-filter::after {
-  content: '\25BC'; /* Flèche vers le bas */
+  content: '\25BC';
   position: absolute;
   right: 15px;
   top: 50%;
@@ -99,20 +94,4 @@
   outline: none;
   box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-.pokemon-filter select:hover {
-  background-color: #f3f3f3;
-}
-
-.pokemon-filter select:focus {
-  border-color: #ffcb05;
-  background-color: #ffffff;
-  box-shadow: 0 0 5px rgba(255, 203, 5, 0.5);
-}
-
-.pokemon-filter select:disabled {
-  background-color: #f8f9fa;
-  color: #999;
-  cursor: not-allowed;
 }

@@ -4,12 +4,12 @@
   border-radius: 12px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
-  max-width: 95%; /* S'ajuste bien sur des petits écrans */
+  max-width: 95%;
   text-align: center;
 }
 
 .pokemon-name {
-  font-size: 1.5em; /* Taille de police adaptée pour mobile */
+  font-size: 1.5em;
   margin-bottom: 10px;
 }
 
@@ -23,19 +23,19 @@
 .pokemon-info {
   text-align: left;
   margin-top: 10px;
-  font-size: 0.9em; /* Taille de texte réduite pour mobile */
+  font-size: 0.9em;
 }
 
 .pokemon-types ul {
   list-style-type: none;
   padding: 0;
-  display: flex; /* Aligne les types en ligne */
-  gap: 8px; /* Espace entre les types */
-  justify-content: center; /* Centre les types horizontalement */
+  display: flex;
+  gap: 8px;
+  justify-content: center;
 }
 
 .pokemon-types li {
-  display: inline-block; /* Chaque type s'affiche sur une seule ligne */
+  display: inline-block;
 }
 
 .pokemon-stats ul {
@@ -47,9 +47,9 @@
   background-color: #ffdd57;
   border-radius: 8px;
   padding: 5px;
-  margin: 3px 3px; /* Ajoute un espacement vertical entre les statistiques */
+  margin: 3px 3px;
   display: inline-block;
-  font-size: 0.85em; /* Taille de texte compacte pour mobile */
+  font-size: 0.85em;
 }
 
 .loading-container {
@@ -74,6 +74,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

@@ -3,7 +3,7 @@
   <select id="pokemon-type" (change)="onTypeChange($event)">
     <option value="">All Types</option>
     @for (type of types; track type) {
-      <option [value]="type">{{ type }}</option>
+    <option [value]="type">{{ type }}</option>
     }
   </select>
 </div>

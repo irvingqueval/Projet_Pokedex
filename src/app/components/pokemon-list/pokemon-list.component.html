@@ -1,22 +1,22 @@
 <div class="pokemon-list">
   @for (pokemon of filteredPokemons; track pokemon.id) {
-    <a [routerLink]="['/pokemon', pokemon.id]" class="pokemon-card">
-      <img [src]="pokemon.sprite" alt="{{ pokemon.name }}">
-      <p>#{{ pokemon.id }}</p>
-      <h3>{{ pokemon.name | titlecase }}</h3>
-      <div class="pokemon-types">
-        @for (type of pokemon.types; track type) {
-          <span [attr.type]="type">{{ type | titlecase }}</span>
-        }
-      </div>
-    </a>
+  <a [routerLink]="['/pokemon', pokemon.id]" class="pokemon-card">
+    <img [src]="pokemon.sprite" alt="{{ pokemon.name }}">
+    <p>#{{ pokemon.id }}</p>
+    <h3>{{ pokemon.name | titlecase }}</h3>
+    <div class="pokemon-types">
+      @for (type of pokemon.types; track type) {
+      <span [attr.type]="type">{{ type | titlecase }}</span>
+      }
+    </div>
+  </a>
   }
 
   @if (loading) {
-    <div class="loading-container">
-      <div class="loading-spinner">
-        <img src="/assets/pokeball-loader.svg" alt="Chargement..." class="pokeball-spinner">
-      </div>
+  <div class="loading-container">
+    <div class="loading-spinner">
+      <img src="/assets/pokeball-loader.svg" alt="Chargement..." class="pokeball-spinner">
     </div>
+  </div>
   }
 </div>

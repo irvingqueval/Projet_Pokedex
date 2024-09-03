@@ -1,43 +1,43 @@
 <div class="pokemon-details-container">
   @if (loading) {
-    <div class="loading-container">
-      <div class="loading-spinner">
-        <img src="/assets/pokeball-loader.svg" alt="Chargement..." class="pokeball-spinner">
-      </div>
+  <div class="loading-container">
+    <div class="loading-spinner">
+      <img src="/assets/pokeball-loader.svg" alt="Chargement..." class="pokeball-spinner">
     </div>
+  </div>
   }
 
   @if (pokemon) {
-    <h2 class="pokemon-name">{{ pokemon.name | titlecase }} (#{{ pokemon.id }})</h2>
-    <img [src]="pokemon.sprite" alt="{{ pokemon.name }}" class="pokemon-image">
+  <h2 class="pokemon-name">{{ pokemon.name | titlecase }} (#{{ pokemon.id }})</h2>
+  <img [src]="pokemon.sprite" alt="{{ pokemon.name }}" class="pokemon-image">
 
-    <div class="pokemon-info">
-      <p><strong>Height:</strong> {{ (pokemon.height / 10) | number: '1.2-2' }} m</p>
-      <p><strong>Weight:</strong> {{ (pokemon.weight / 10) | number: '1.2-2' }} kg</p>
+  <div class="pokemon-info">
+    <p><strong>Height:</strong> {{ (pokemon.height / 10) | number: '1.2-2' }} m</p>
+    <p><strong>Weight:</strong> {{ (pokemon.weight / 10) | number: '1.2-2' }} kg</p>
 
-      <div class="pokemon-types">
-        <p><strong>Types:</strong></p>
-        <ul>
-          @for (type of pokemon.types; track type) {
-            <li><span [attr.type]="type">{{ type | titlecase }}</span></li>
-          }
-        </ul>
-      </div>
-
-      <div class="pokemon-stats">
-        <p><strong>Stats:</strong></p>
-        <ul>
-          @for (stat of pokemon.stats; track stat.name) {
-            <li>{{ stat.name | titlecase }}: {{ stat.value }}</li>
-          }
-        </ul>
-      </div>
+    <div class="pokemon-types">
+      <p><strong>Types:</strong></p>
+      <ul>
+        @for (type of pokemon.types; track type) {
+        <li><span [attr.type]="type">{{ type | titlecase }}</span></li>
+        }
+      </ul>
     </div>
+
+    <div class="pokemon-stats">
+      <p><strong>Stats:</strong></p>
+      <ul>
+        @for (stat of pokemon.stats; track stat.name) {
+        <li>{{ stat.name | titlecase }}: {{ stat.value }}</li>
+        }
+      </ul>
+    </div>
+  </div>
   }
 
   @if (error) {
-    <div class="error-message">
-      <p>Error loading Pokémon details. Please try again later.</p>
-    </div>
+  <div class="error-message">
+    <p>Error loading Pokémon details. Please try again later.</p>
+  </div>
   }
 </div>

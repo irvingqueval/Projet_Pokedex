@@ -9,15 +9,15 @@ import { Pokemon, PokemonDetails } from '../models/pokemon.model';
 })
 export class PokemonService {
 
-  private baseUrl = 'https://pokeapi.co/api/v2/pokemon'; // URL de base pour l'API Pokémon
+  private baseUrl = 'https://pokeapi.co/api/v2/pokemon';
 
   constructor(private http: HttpClient) { }
 
-  // Récupère une liste de Pokémon avec pagination
+  // Retrieves a Pokémon list with pagination
   getPokemonList(offset: number, limit: number): Observable<Pokemon[]> {
     const maxLimit = 151;
     if (offset + limit > maxLimit) {
-      limit = maxLimit - offset; // Ajuste la limite pour ne pas dépasser 151
+      limit = maxLimit - offset;
     }
 
     return this.http.get<any>(`${this.baseUrl}?offset=${offset}&limit=${limit}`).pipe(
@@ -29,7 +29,7 @@ export class PokemonService {
     );
   }
 
-  // Récupère les détails d'un Pokémon par son URL
+  // Retrieves Pokémon details via URL
   private getPokemonDetails(url: string): Observable<Pokemon> {
     return this.http.get<any>(url).pipe(
       map(details => ({
@@ -41,7 +41,7 @@ export class PokemonService {
     );
   }
 
-  // Récupère les détails d'un Pokémon par son ID
+  // Retrieves Pokémon details by ID
   getPokemonDetailsById(id: number): Observable<PokemonDetails> {
     return this.http.get<any>(`${this.baseUrl}/${id}`).pipe(
       map(details => ({

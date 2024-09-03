@@ -19,7 +19,7 @@ export class PokemonDetailsComponent implements OnInit {
   constructor(
     private pokemonService: PokemonService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -35,7 +35,7 @@ export class PokemonDetailsComponent implements OnInit {
   fetchPokemonDetails(id: number): void {
     this.loading = true;
 
-    // Ajouter un délai avant de charger les détails du Pokémon
+    //Add a delay before loading Pokémon details (not advisors, here it's just to show the aninamation)
     setTimeout(() => {
       this.pokemonService.getPokemonDetailsById(id).subscribe(
         (data: PokemonDetails) => {
@@ -44,7 +44,7 @@ export class PokemonDetailsComponent implements OnInit {
         },
         () => this.handleError()
       );
-    }, 500); // Délai de 500ms avant de faire la requête
+    }, 500);
   }
 
   handleError(): void {

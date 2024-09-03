@@ -1,13 +1,13 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router'; // Import de RouterModule
+import { RouterModule } from '@angular/router';
 import { PokemonFilterComponent } from '../pokemon-filter/pokemon-filter.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, PokemonFilterComponent], // Ajout de RouterModule dans imports
+  imports: [CommonModule, RouterModule, PokemonFilterComponent],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
@@ -18,7 +18,7 @@ export class HeaderComponent {
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.router.events.subscribe(() => {
-      // Masquer la barre de recherche et le filtre sur la page de détails
+      // Hide search bar and filter on details page
       this.showSearchAndFilter = !this.router.url.includes('/pokemon/');
     });
   }
