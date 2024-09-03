@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, HostListener } from '@angular/core';
+import { Component, OnInit, OnChanges, HostListener } from '@angular/core';
 import { PokemonService } from '../../services/pokemon.service';
 import { Pokemon } from '../../models/pokemon.model';
 import { TitleCasePipe } from '../../pipes/title-case.pipe';
@@ -13,7 +13,7 @@ import { FilterService } from '../../services/filter.service';
   templateUrl: './pokemon-list.component.html',
   styleUrls: ['./pokemon-list.component.css']
 })
-export class PokemonListComponent implements OnInit, OnChanges {
+export class PokemonListComponent implements OnInit {
   pokemons: Pokemon[] = [];
   filteredPokemons: Pokemon[] = [];
   offset = 0;
@@ -42,10 +42,6 @@ export class PokemonListComponent implements OnInit, OnChanges {
 
     console.log("Component PokemonList initialized");
     console.log(this.pokemons);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-
   }
 
   loadMorePokemons(): void {
