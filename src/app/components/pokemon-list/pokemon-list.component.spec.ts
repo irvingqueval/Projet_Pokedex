@@ -10,7 +10,7 @@ describe('PokemonListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PokemonListComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(PokemonListComponent);
     component = fixture.componentInstance;
