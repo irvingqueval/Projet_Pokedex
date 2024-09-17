@@ -45,24 +45,22 @@ export class PokemonListComponent implements OnInit {
   }
 
   loadMorePokemons(): void {
-    if (this.loading || this.offset >= this.maxPokemons) return; // Prevents charging if there are no Pokémon left to charge
+    if (this.loading || this.offset >= this.maxPokemons) return; // Prevents loading if there are no Pokémon left to load
     this.loading = true;
 
-    setTimeout(() => {
-      this.pokemonService.getPokemonList(this.offset, this.limit).subscribe((data: Pokemon[]) => {
-        this.pokemons = [...this.pokemons, ...data];
-        this.offset += this.limit;
-        this.loading = false;
+    this.pokemonService.getPokemonList(this.offset, this.limit).subscribe((data: Pokemon[]) => {
+      this.pokemons = [...this.pokemons, ...data];
+      this.offset += this.limit;
+      this.loading = false;
 
-        // Ensure that the offset does not exceed the maximum number of Pokémon
-        if (this.offset >= this.maxPokemons) {
-          this.offset = this.maxPokemons;
-        }
+      // Ensure that the offset does not exceed the maximum number of Pokémon
+      if (this.offset >= this.maxPokemons) {
+        this.offset = this.maxPokemons;
+      }
 
-        // Reapply filter after loading
-        this.applyFilter();
-      });
-    }, 500);
+      // Reapply filter after loading
+      this.applyFilter();
+    });
   }
 
   applyFilter(): void {

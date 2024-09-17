@@ -35,16 +35,14 @@ export class PokemonDetailsComponent implements OnInit {
   fetchPokemonDetails(id: number): void {
     this.loading = true;
 
-    //Add a delay before loading Pokémon details (not advisors, here it's just to show the aninamation)
-    setTimeout(() => {
-      this.pokemonService.getPokemonDetailsById(id).subscribe(
-        (data: PokemonDetails) => {
-          this.pokemon = data;
-          this.loading = false;
-        },
-        () => this.handleError()
-      );
-    }, 500);
+    // Remove the delay and load the Pokémon details directly
+    this.pokemonService.getPokemonDetailsById(id).subscribe(
+      (data: PokemonDetails) => {
+        this.pokemon = data;
+        this.loading = false;
+      },
+      () => this.handleError()
+    );
   }
 
   handleError(): void {
